@@ -1,0 +1,15 @@
+{
+  "name": "1337b0t",
+  "description": "does 1337 things",
+  "version": "0.9.1",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "discord.js": "^12.4.1",
+    "request": "^2.81.0",
+    "minecraft-server-util": "^3.0.2",
+    "minimist": "^1.2.5"
+  }
+}
