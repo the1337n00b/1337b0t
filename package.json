@@ -2,14 +2,16 @@
   "name": "1337b0t",
   "description": "does 1337 things",
   "version": "0.9.1",
-  "main": "bot.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "discord.js": "^12.4.1",
-    "request": "^2.81.0",
     "minecraft-server-util": "^3.0.2",
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.5",
+    "postgres": "^1.0.2",
+    "prexit": "0.0.5",
+    "request": "^2.81.0"
   }
 }

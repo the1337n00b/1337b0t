@@ -1,0 +1,4 @@
+{
+  "PG_CONN"   : "postgres://user:pass@127.0.0.1:5432/db_name",
+  "BOT_TOKEN" : "discord-bot-token-goes-here"
+}
