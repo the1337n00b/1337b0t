@@ -49,6 +49,8 @@ CREATE OR REPLACE FUNCTION set_def_server()
   RETURNS TRIGGER 
   LANGUAGE PLPGSQL
 AS $$
+DECLARE
+  guild_exists int;
 BEGIN
   IF NEW.def IS TRUE THEN
     UPDATE mc_servers SET def = FALSE, updated = '2000-01-01'
@@ -56,8 +58,12 @@ BEGIN
       AND id != NEW.id;
   END IF;
 
-  INSERT INTO dc_servers (guild_id, guild_name) VALUES (NEW.guild_id, NEW.guild_name)
-  ON CONFLICT (guild_id) DO UPDATE SET guild_name = NEW.guild_name WHERE guild_name != NEW.guild_name;
+  SELECT count(*) INTO guild_exists FROM dc_servers WHERE guild_id = NEW.guild_id and guild_name = NEW.guild_name;
+
+  IF guild_exists = 0 THEN
+    INSERT INTO dc_servers (guild_id, guild_name) VALUES (NEW.guild_id, NEW.guild_name)
+    ON CONFLICT (guild_id) DO UPDATE SET guild_name = NEW.guild_name;
+  END IF;
 
   RETURN NEW;
 END;
@@ -68,6 +74,7 @@ create unique index uix_mc_servers_uid on mc_servers (uid);
 create unique index ix_server_name on mc_servers (guild_id, name);
 create index ix_mc_servers_guild on mc_servers (guild_id, def desc);
 
+drop table if exists do_servers;
 create table do_servers (
   id          serial not null primary key,
   guild_id    text not null,
@@ -88,16 +95,18 @@ create table do_servers (
   vol         text,
   cname       text, -- 'mc'
   domain      text, -- 'blah.something.com'
-  srv         text, -- '_minecraft._tcp'
+  srv         text -- '_minecraft._tcp'
 );
 
 -- insert into mc_servers (guild_id, guild_name, creator, creator_id, def, name, title, host, port) values
 -- ('123', 'test', 'keith', '456', true, 'cool_srv', 'the coolest server', '10.1.1.1', 1024)
--- returning id, guild_name, creator, name, title, def;
+-- returning id, guild_name, creator, name, title, def; commit;
+-- select * from dc_servers;
 
 -- insert into mc_servers (guild_id, guild_name, creator, creator_id, def, name, title, host, port) values
--- ('123', 'test', 'keith', '456', true, 'new_srv', 'the newest server', '10.1.1.2', 2048)
--- returning id, guild_name, creator, name, title, def;
+-- ('123', 'TEST', 'keith', '456', true, 'new_srv', 'the newest server', '10.1.1.2', 2048)
+-- returning id, guild_name, creator, name, title, def; commit;
+-- select * from dc_servers;
 
 -- select id, created, updated, guild_name, creator, name, title, def from mc_servers; rollback;
 -- update mc_servers set def = true where id = 5; commit;
