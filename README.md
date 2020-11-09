@@ -3,8 +3,6 @@ does 1337 things
 
 Pending Tasks:
 
-!delete_server
-
 !channel_default ~ save a default server for the channel
   ~ update all other commands (status, cmd) to get this default
   ~ perhaps update get_servers to set channel defaults named default_guildid_channelid, so functions could attempt to get those first
