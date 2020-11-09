@@ -4,7 +4,7 @@ create table dc_servers (
   guild_id    text not null,
   guild_name  text not null,
   admins      json not null default '[]',
-  chan_defs   json not null default '{}',
+  defaults    json not null default '{}', -- channel defaults
   do_servers  json not null default '[]' -- {vol: 'configs', rconpass: 'P@ssw0rd'}
 );
 create unique index uix_guild on dc_servers (guild_id);
@@ -21,7 +21,7 @@ create table mc_servers (
   creator_id  text not null,
   operators   json not null default '[]',
   channels    json not null default '[]', -- only answer msgs about this server on speicific channels
-  def         boolean default false,
+  def         boolean not null default false,
   name        text not null,
   title       text not null,
   host        text not null,
