@@ -21,6 +21,7 @@ create table mc_servers (
   creator     text not null,
   creator_id  text not null,
   operators   json not null default '[]',
+  delegates   json not null default '[]',
   channels    json not null default '[]', -- only answer msgs about this server on speicific channels
   def         boolean not null default false,
   name        text not null,
