@@ -18,6 +18,5 @@ Pending Tasks:
   ~!permissions
   ~!perms
 
-!dm_toggle enable owner/admins to toggle requiring DMs (@the1337b0t) otherwise the bot will ignore messages
-  ~ before regexp.exec() remove the @the1337b0t/id from the message, and regex/test the result (should be simple)
+!dm_toggle enable owner/admins to toggle requiring DMs
 

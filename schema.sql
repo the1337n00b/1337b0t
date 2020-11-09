@@ -3,6 +3,7 @@ create table dc_servers (
   id          serial not null primary key,
   guild_id    text not null,
   guild_name  text not null,
+  require_dm  boolean not null default false,
   admins      json not null default '[]',
   defaults    json not null default '{}', -- channel defaults
   do_servers  json not null default '[]' -- {vol: 'configs', rconpass: 'P@ssw0rd'}
