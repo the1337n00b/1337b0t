@@ -3,8 +3,6 @@ does 1337 things
 
 Pending Tasks:
 
-!delegate server add/remove/list @username
-
 !list_permissions - show all permissions - this would be equiv to running !admin list & !op list & !delegate list
   ~!permissions
   ~!perms
